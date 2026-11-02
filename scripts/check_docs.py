@@ -43,7 +43,7 @@ def names_from_list(value, kind):
     for part in value.split(","):
         part = part.strip()
         if kind == "select":
-            part = part.split(":")[-1].split("::")[0]
+            part = part.split("::")[0].split(":")[-1]
         else:
             part = part.split(".")[0]
         out.append(part)

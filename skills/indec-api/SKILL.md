@@ -81,10 +81,11 @@ Si trabajás en otro lenguaje, la API es HTTP plano: ver `references/query-synta
    páginas. La PK de cada tabla está en `references/endpoints.md`.
 4. **`206 Partial Content` es éxito**: pasa cuando mandás `Prefer: count=exact` y la respuesta es parcial;
    el total viene en `Content-Range: 0-999/103545`.
-5. **Período como texto de ancho fijo**: `AAAAMM` mensual; `AAAAN` con N = semestre en `pobreza_eph`
-   (`20242` = 2.º semestre 2024) y N = trimestre en `mercado_trabajo_eph`. Comparar con `gte.`/`lte.`
-   funciona por ser ancho fijo. En población, `fecha` es el año: texto en las tablas de jurisdicción y
-   departamento, número en la nacional.
+5. **Período como texto**: `AAAAMM` en las tablas mensuales (`gte.202401` funciona por ser ancho fijo).
+   En `pobreza_eph` la spec dice `AAAANS` (semestre) y en `mercado_trabajo_eph` `AAAANT` (trimestre), sin
+   ejemplo: **confirmá el formato real con `latest <tabla>` antes de filtrar por rango**, o filtrá por las
+   columnas numéricas `anio` + `semestre`/`trimestre`. En población, `fecha` es el año: texto en las tablas
+   de jurisdicción y departamento, número en la nacional.
 6. **`valor` es texto en `indice_salarios`** (número en el resto). Convertí antes de operar.
 7. **Nulos con significado**: cuando `valor` es `null`, `observaciones` puede traer un signo convencional
    (`*` provisorio, `**` preliminar, `e`/`i` estimado, `-` cero absoluto, `...` no disponible, `///` no

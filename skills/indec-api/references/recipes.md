@@ -17,7 +17,8 @@ python3 $S get ipc_nacional region=eq.<region> nivel=eq.<nivel_general> \
 ```
 
 Truco para obtener `<ultimo_periodo>`: `python3 $S get ipc_nacional --select periodo --order periodo.desc --limit 1`.
-O directamente `python3 $S latest ipc_nacional` y mirá qué combinaciones vinieron.
+`latest` también sirve, pero en tablas con miles de filas por período (IPC, comercio exterior) acotalo con
+un filtro (`python3 $S latest ipc_nacional region=eq.<region> --periods 12`) para no recorrer de más.
 
 Inflación acumulada de N meses: usá el `tipo_de_indicador` de variación acumulada si existe; si la calculás
 vos, encadená `Π(1 + v/100) − 1` sobre variaciones mensuales, nunca sumes porcentajes.
@@ -41,7 +42,8 @@ python3 $S get pobreza_eph --select periodo,tasa_pobreza_personas,tasa_indigenci
   --order periodo.desc --limit 6
 ```
 
-`periodo` = `AAAAS`: `20242` es el segundo semestre de 2024.
+La spec describe `periodo` como `AAAANS` (año + semestre) sin ejemplo: mirá un valor real con
+`python3 $S latest pobreza_eph` antes de armar filtros por rango, o filtrá por `anio=gte.2020`.
 
 ## Mercado de trabajo (trimestral, tabla ancha)
 

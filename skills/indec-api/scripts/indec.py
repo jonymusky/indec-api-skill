@@ -185,7 +185,7 @@ def validate(table, filters, select=None, order=None):
     for part in (select or "").split(","):
         part = part.strip()
         if part and part != "*":
-            names.append(part.split(":")[-1].split("::")[0])  # alias:col y col::cast
+            names.append(part.split("::")[0].split(":")[-1])  # alias:col y col::cast
     for part in (order or "").split(","):
         part = part.strip()
         if part:
@@ -201,7 +201,10 @@ def period_col(meta):
     raise ApiError("La tabla no tiene columna de período (periodo/Periodo/fecha)")
 
 
-def add_labels(rows):
+def add_labels(rows, table):
+    if not table.startswith("comercio_exterior_"):
+        print("# Aviso: --labels solo aplica a tablas comercio_exterior_*; se ignora.", file=sys.stderr)
+        return rows
     code_cols = {k for r in rows[:1] for k in r if k.lower().endswith("_cod")}
     if not code_cols:
         return rows
@@ -277,7 +280,7 @@ def cmd_get(a):
         if a.limit is None and len(rows) == PAGE:
             print(f"# Aviso: llegaron {PAGE} filas (tope del servidor). Puede haber más: usá --all o paginá con --offset.", file=sys.stderr)
     if a.labels:
-        rows = add_labels(rows)
+        rows = add_labels(rows, a.table)
     emit(rows, a.format)
 
 
@@ -291,7 +294,8 @@ def cmd_count(a):
 def cmd_distinct(a):
     meta = table_meta(load_spec(), a.table)
     cols = [c.strip() for c in a.columns.split(",") if c.strip()]
-    check_columns(meta, a.table, cols + [k for k, _ in parse_filters(a.filters)])
+    if not a.no_validate:
+        check_columns(meta, a.table, cols + [k for k, _ in parse_filters(a.filters)])
     # PostgREST no tiene DISTINCT: traemos solo esas columnas ordenando por la PK completa y deduplicamos.
     rows = fetch_all(a.table, parse_filters(a.filters), ",".join(cols), ",".join(meta["pk"]))
     seen, out = set(), []
@@ -306,7 +310,7 @@ def cmd_distinct(a):
 
 def cmd_latest(a):
     filters = parse_filters(a.filters)
-    meta = validate(a.table, filters, a.select)
+    meta = table_meta(load_spec(), a.table) if a.no_validate else validate(a.table, filters, a.select)
     pc = period_col(meta)
     rest = [c for c in meta["pk"] if c != pc]
     # Recorre de más reciente a más antiguo hasta juntar N períodos distintos.
@@ -330,7 +334,7 @@ def cmd_latest(a):
     in_list = "in.(" + ",".join(f'"{p}"' if isinstance(p, str) else str(p) for p in periods) + ")"
     rows = fetch_all(a.table, filters + [(pc, in_list)], a.select, ",".join(meta["pk"]))
     if a.labels:
-        rows = add_labels(rows)
+        rows = add_labels(rows, a.table)
     emit(rows, a.format)
 
 
@@ -370,6 +374,7 @@ def main():
     l.add_argument("--periods", type=int, default=1)
     l.add_argument("--select")
     l.add_argument("--labels", action="store_true")
+    l.add_argument("--no-validate", action="store_true")
     l.add_argument("--format", choices=["json", "csv", "ndjson"], default="json")
     l.set_defaults(fn=cmd_latest)
 
@@ -377,7 +382,8 @@ def main():
     d.add_argument("table")
     d.add_argument("columns")
     d.add_argument("filters", nargs="*")
-    d.add_argument("--format", choices=["json", "csv", "ndjson"], default="csv")
+    d.add_argument("--format", choices=["json", "csv", "ndjson"], default="csv", help="default csv (más legible para explorar)")
+    d.add_argument("--no-validate", action="store_true")
     d.set_defaults(fn=cmd_distinct)
 
     a = p.parse_args()

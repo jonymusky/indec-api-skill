@@ -76,8 +76,8 @@ python3 $S columns mercado_trabajo_eph               # columnas, tipos, descripc
 
 python3 $S distinct ipc_nacional region,clasificador,nivel        # qué valores existen
 python3 $S latest pobreza_eph --periods 4 --format csv            # últimos 4 semestres
-python3 $S get mercado_trabajo_eph periodo=gte.20231 \
-  --select periodo,tasa_de_desocupacion --order periodo
+python3 $S get mercado_trabajo_eph anio=gte.2023 \
+  --select periodo,anio,trimestre,tasa_de_desocupacion --order periodo
 python3 $S count comercio_exterior_exportacion_bienes Anio=eq.2024
 python3 $S get comercio_exterior_exportacion_bienes Anio=eq.2024 --all --labels --format csv > expo_2024.csv
 ```
@@ -87,12 +87,12 @@ python3 $S get comercio_exterior_exportacion_bienes Anio=eq.2024 --all --labels 
 | `tables` / `columns <tabla>` | Metadatos desde la spec pública (cacheada 24 h en `~/.cache/indec-api`) |
 | `get <tabla> [filtros]` | Consulta. `--select --order --limit --offset --all --count --format json\|csv\|ndjson` |
 | `latest <tabla> --periods N` | Filas de los últimos N períodos; detecta `periodo` / `Periodo` / `fecha` |
-| `distinct <tabla> <cols>` | Combinaciones únicas (PostgREST no tiene `DISTINCT`) |
+| `distinct <tabla> <cols>` | Combinaciones únicas (PostgREST no tiene `DISTINCT`); sale en CSV por defecto |
 | `count <tabla> [filtros]` | Total con `Prefer: count=exact` |
 | `--labels` | Traduce `pais_cod`, `rubro_cod`, etc. con `comercio_exterior_nomenclaturas` |
 
 Los filtros son estilo PostgREST: `col=op.valor` con `eq neq gt gte lt lte like ilike in is`, más
-`or=(…)` y `not.`. Reintenta 429/5xx con backoff.
+`or=(…)` y `not.`. Reintenta 429/5xx con backoff. `--no-validate` saltea la validación de columnas.
 
 ## Qué trae
 
