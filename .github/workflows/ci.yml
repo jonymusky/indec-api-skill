@@ -1,0 +1,54 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 12 * * 1" # lunes 09:00 ART: revisa si INDEC cambió la spec
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compilar CLI
+        run: python -m py_compile skills/indec-api/scripts/indec.py scripts/*.py
+      - name: Docs consistentes con la spec
+        run: python scripts/check_docs.py
+      - name: CLI sin token (spec pública)
+        run: python skills/indec-api/scripts/indec.py tables
+      - name: Smoke test con token (si hay secret INDEC_TOKEN)
+        env:
+          INDEC_TOKEN: ${{ secrets.INDEC_TOKEN }}
+        if: env.INDEC_TOKEN != ''
+        run: |
+          python skills/indec-api/scripts/indec.py count ipc_nacional
+          python skills/indec-api/scripts/indec.py latest pobreza_eph --format csv | head
+
+  spec-sync:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Bajar spec y regenerar catálogo
+        run: |
+          python scripts/gen_endpoints.py --fetch
+          python scripts/check_docs.py || echo "::warning::La spec nueva rompe ejemplos de la documentación"
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/spec-sync
+          title: "chore: sincronizar spec del Catálogo API-INDEC"
+          commit-message: "chore: sincronizar spec del Catálogo API-INDEC"
+          body: "Cambios detectados en https://api.indec.gob.ar/api/openapi?v=2. Revisá tablas/columnas nuevas y actualizá SKILL.md si hace falta."

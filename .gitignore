@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+*.ndjson
+*.csv
+.DS_Store
+node_modules/
