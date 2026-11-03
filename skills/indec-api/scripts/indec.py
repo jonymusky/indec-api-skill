@@ -149,16 +149,28 @@ def total_from(content_range):
 
 
 def fetch_all(table, filters, select=None, order=None):
-    rows, offset = [], 0
+    # La primera página pide Prefer: count=exact: el total sale del Content-Range (0-999/103545)
+    # y permite mostrar progreso, cortar sin una request de más y detectar filas faltantes.
+    rows, offset, total = [], 0, None
     while True:
         params = list(filters) + [("order", order), ("limit", PAGE), ("offset", offset)]
         if select:
             params.append(("select", select))
-        page, _ = request(table, params)
+        page, cr = request(table, params, count=offset == 0)
+        if offset == 0:
+            total = total_from(cr)
         rows.extend(page)
-        if len(page) < PAGE:
-            return rows
+        if total is not None and total > PAGE:
+            pages = -(-total // PAGE)
+            print(f"# página {offset // PAGE + 1}/{pages} ({len(rows)}/{total} filas)", file=sys.stderr)
         offset += PAGE
+        if len(page) < PAGE or (total is not None and offset >= total):
+            break
+    if total is not None and len(rows) != total:
+        print(f"# Aviso: se esperaban {total} filas y llegaron {len(rows)}. "
+              "La tabla pudo cambiar durante la descarga, o el order no incluye la clave primaria completa.",
+              file=sys.stderr)
+    return rows
 
 
 

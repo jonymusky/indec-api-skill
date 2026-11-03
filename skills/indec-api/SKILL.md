@@ -80,7 +80,8 @@ Si trabajás en otro lenguaje, la API es HTTP plano: ver `references/query-synta
    Para paginar, `order` tiene que incluir **la clave primaria completa** o se duplican/pierden filas entre
    páginas. La PK de cada tabla está en `references/endpoints.md`.
 4. **`206 Partial Content` es éxito**: pasa cuando mandás `Prefer: count=exact` y la respuesta es parcial;
-   el total viene en `Content-Range: 0-999/103545`.
+   el total viene en `Content-Range: 0-999/103545`. `--all` lo usa en la primera página para mostrar el
+   progreso por stderr y avisar si al final faltan filas.
 5. **Período como texto**: `AAAAMM` en las tablas mensuales (`gte.202401` funciona por ser ancho fijo).
    En `pobreza_eph` la spec dice `AAAANS` (semestre) y en `mercado_trabajo_eph` `AAAANT` (trimestre), sin
    ejemplo: **confirmá el formato real con `latest <tabla>` antes de filtrar por rango**, o filtrá por las
