@@ -15,12 +15,12 @@ Los nombres de columna son **sensibles a mayúsculas**: copialos tal cual de est
 | [`/estimaciones_poblacion_departamento_2022_2035`](#estimaciones_poblacion_departamento_2022_2035) | Estimaciones de población por departamento y sexo | Dirección de Estadísticas Poblacionales |
 | [`/proyecciones_poblacion_jurisdiccion_2022_2040`](#proyecciones_poblacion_jurisdiccion_2022_2040) | Proyecciones de población por jurisdicción, sexo y edad | Dirección de Estadísticas Poblacionales |
 | [`/proyecciones_poblacion_nacional_2022_2040`](#proyecciones_poblacion_nacional_2022_2040) | Proyecciones nacionales de población por sexo y edad | Dirección de Estadísticas Poblacionales |
-| [`/valorizacion_canastas_cba_cbt`](#valorizacion_canastas_cba_cbt) | Valorización de las canastas básicas (CBA y CBT) | Dirección de Índices de Precios de Consumo |
 | [`/ipc_nacional`](#ipc_nacional) | Índice de Precios al Consumidor (IPC) | Dirección de Índices de Precios de Consumo |
-| [`/redeterminacion_precios_contratos_obras_publicas`](#redeterminacion_precios_contratos_obras_publicas) | Redeterminación de precios de obras públicas | Dirección de Índices de Precios de la Producción |
-| [`/sipm_precios_mayoristas`](#sipm_precios_mayoristas) | Sistema de índices de precios mayoristas | Dirección de Índices de Precios de la Producción |
+| [`/valorizacion_canastas_cba_cbt`](#valorizacion_canastas_cba_cbt) | Valorización de las canastas básicas (CBA y CBT) | Dirección de Índices de Precios de Consumo |
 | [`/indice_salarios`](#indice_salarios) | Índice de salarios | Dirección de Índices de Precios de la Producción |
 | [`/icc_precios_construccion`](#icc_precios_construccion) | Índice del costo de la construcción | Dirección de Índices de Precios de la Producción |
+| [`/redeterminacion_precios_contratos_obras_publicas`](#redeterminacion_precios_contratos_obras_publicas) | Redeterminación de precios de obras públicas | Dirección de Índices de Precios de la Producción |
+| [`/sipm_precios_mayoristas`](#sipm_precios_mayoristas) | Sistema de índices de precios mayoristas | Dirección de Índices de Precios de la Producción |
 | [`/estimador-mensual-de-actividad-economica-nivel-general`](#estimador-mensual-de-actividad-economica-nivel-general) | Estimador mensual de actividad económica. Nivel general | Dirección Nacional de Cuentas Nacionales |
 | [`/estimador-mensual-de-actividad-economica-sectores`](#estimador-mensual-de-actividad-economica-sectores) | Estimador mensual de actividad económica. Sectores | Dirección Nacional de Cuentas Nacionales |
 | [`/pobreza_eph`](#pobreza_eph) | Incidencia de la pobreza y la indigencia (EPH) | Dirección Nacional de Estadísticas de Condiciones de Vida |
@@ -135,6 +135,32 @@ Estimaciones y proyecciones de población al 1° de julio de cada año calendari
 | `poblacion` | number | sí | Cantidad de habitantes estimada (2022) o proyectada (2023-2040) para la fecha de referencia |
 | `fecha` | number |  | **PK** Año correspondiente a la estimación o proyección de población, referida al 1 de julio |
 
+## ipc_nacional
+
+**Índice de Precios al Consumidor (IPC)** — Dirección de Índices de Precios de Consumo
+
+Índice de precios al consumidor (IPC) de la República Argentina, con aperturas por región, división, grupo, clase y subclase, desde diciembre de 2016. Para más información, se puede consultar la metodología INDEC N° 32, Índice de precios al consumidor (IPC). Base diciembre 2016=100, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipc_nacional_2019.pdf
+
+- Clave primaria (usala completa en `order` para paginar): `clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida`
+- Traer todo: `GET /ipc_nacional?order=clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida&limit=1000&offset=0`
+
+| Columna | Tipo | Nulo | Descripción |
+|---|---|---|---|
+| `clasificador` | string |  | **PK** Clasificador utilizado para organizar y codificar las categorías del dato |
+| `nivel` | string |  | **PK** Nivel de desagregación de la categoría dentro de la estructura del clasificador |
+| `codigo` | string |  | **PK** Código asignado a la categoría de acuerdo con el clasificador utilizado |
+| `descripcion` | string |  | **PK** Denominación de la categoría correspondiente al código informado |
+| `periodo` | string |  | **PK** Período de referencia del dato, expresado en formato AAAAMM (meses) |
+| `anio` | number |  | **PK** Año correspondiente al período de referencia del dato |
+| `mes` | number |  | **PK** Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre) |
+| `indicador` | string |  | **PK** Nombre del indicador estadístico |
+| `tipo_de_indicador` | string |  | **PK** Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio |
+| `tipo_de_indicador_descripcion` | string |  | **PK** Descripción del tipo de indicador |
+| `region` | string |  | **PK** Región estadística a la que corresponde el dato |
+| `unidad_de_medida` | string |  | **PK** Unidad en la que se expresa el valor del indicador |
+| `valor` | number | sí | Valor del indicador para el período y las categorías informadas |
+| `observaciones` | string | sí | Notas necesarias para el valor informado |
+
 ## valorizacion_canastas_cba_cbt
 
 **Valorización de las canastas básicas (CBA y CBT)** — Dirección de Índices de Precios de Consumo
@@ -161,14 +187,14 @@ Valorización mensual de la canasta básica alimentaria (CBA) y de la canasta b�
 | `valor` | number | sí | Valor del indicador para el período y las categorías informadas |
 | `observaciones` | string | sí | Notas necesarias para el valor informado |
 
-## ipc_nacional
+## indice_salarios
 
-**Índice de Precios al Consumidor (IPC)** — Dirección de Índices de Precios de Consumo
+**Índice de salarios** — Dirección de Índices de Precios de la Producción
 
-Índice de precios al consumidor (IPC) de la República Argentina, con aperturas por región, división, grupo, clase y subclase, desde diciembre de 2016. Para más información, se puede consultar la metodología INDEC N° 32, Índice de precios al consumidor (IPC). Base diciembre 2016=100, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipc_nacional_2019.pdf
+El índice de salarios estima la evolución de los salarios pagados en la economía aislando el indicador de variaciones relacionadas con conceptos tales como la cantidad de horas trabajadas, descuentos por ausentismo, premios por productividad y todo otro concepto asociado al desempeño o a las características de los individuos concretos. La serie muestra la evolución de los salarios pagados en los sectores privado registrado y público desde noviembre de 2015. A partir de octubre de 2016 se incorporó la serie del sector privado no registrado y el cálculo del índice de salarios total, que resulta de la agregación de los índices de salarios de los componentes mencionados. Para más información, se puede consultar la metodología INDEC N° 16, Índice de salarios y coeficiente de variación salarial, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/sociedad/cvs_metodologia.pdf
 
-- Clave primaria (usala completa en `order` para paginar): `clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida`
-- Traer todo: `GET /ipc_nacional?order=clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida&limit=1000&offset=0`
+- Clave primaria (usala completa en `order` para paginar): `clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,unidad_de_medida`
+- Traer todo: `GET /indice_salarios?order=clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,unidad_de_medida&limit=1000&offset=0`
 
 | Columna | Tipo | Nulo | Descripción |
 |---|---|---|---|
@@ -180,6 +206,32 @@ Valorización mensual de la canasta básica alimentaria (CBA) y de la canasta b�
 | `anio` | number |  | **PK** Año correspondiente al período de referencia del dato |
 | `mes` | number |  | **PK** Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre) |
 | `indicador` | string |  | **PK** Nombre del indicador estadístico |
+| `tipo_de_indicador` | string |  | **PK** Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio |
+| `tipo_de_indicador_descripcion` | string |  | **PK** Descripción del tipo de indicador |
+| `unidad_de_medida` | string |  | **PK** Unidad en la que se expresa el valor del indicador |
+| `valor` | number | sí | Valor del indicador para el período y las categorías informadas |
+| `observaciones` | string | sí | Notas necesarias para el valor informado |
+
+## icc_precios_construccion
+
+**Índice del costo de la construcción** — Dirección de Índices de Precios de la Producción
+
+Índice del costo de la construcción (ICC) en el Gran Buenos Aires, base 1993. Este endpoint contiene información desde noviembre de 2015. Para más información, se puede consultar la metodología INDEC N° 9, Índice del Costo de la Construcción en el Gran Buenos Aires, base 1993, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_icc.pdf
+
+- Clave primaria (usala completa en `order` para paginar): `indicador,codigo_apertura,codigo_CPC_1,clasificador,nivel,descripcion,periodo,anio,mes,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida`
+- Traer todo: `GET /icc_precios_construccion?order=indicador,codigo_apertura,codigo_CPC_1,clasificador,nivel,descripcion,periodo,anio,mes,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida&limit=1000&offset=0`
+
+| Columna | Tipo | Nulo | Descripción |
+|---|---|---|---|
+| `indicador` | string |  | **PK** Nombre del indicador estadístico |
+| `codigo_apertura` | string |  | **PK** Código que identifica el nivel de apertura o desagregación del dato |
+| `codigo_CPC_1` | string |  | **PK** Código de la Clasificación Central Provisional de Productos (CPC) elaborada por la Organización de las Naciones Unidas. |
+| `clasificador` | string |  | **PK** Clasificador utilizado para organizar y codificar las categorías del dato |
+| `nivel` | string |  | **PK** Nivel de desagregación de la categoría dentro de la estructura del clasificador |
+| `descripcion` | string |  | **PK** Denominación de la categoría correspondiente al código informado |
+| `periodo` | string |  | **PK** Período de referencia del dato, expresado en formato AAAAMM (meses) |
+| `anio` | number |  | **PK** Año correspondiente al período de referencia del dato |
+| `mes` | number |  | **PK** Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre) |
 | `tipo_de_indicador` | string |  | **PK** Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio |
 | `tipo_de_indicador_descripcion` | string |  | **PK** Descripción del tipo de indicador |
 | `region` | string |  | **PK** Región estadística a la que corresponde el dato |
@@ -235,58 +287,6 @@ El Sistema de índices de precios mayoristas (SIPM) está compuesto por el índi
 | `clasificador` | string |  | **PK** Clasificador utilizado para organizar y codificar las categorías del dato |
 | `nivel` | string |  | **PK** Nivel de desagregación de la categoría dentro de la estructura del clasificador |
 | `codigo_apertura` | string |  | **PK** Código que identifica el nivel de apertura o desagregación del dato |
-| `descripcion` | string |  | **PK** Denominación de la categoría correspondiente al código informado |
-| `periodo` | string |  | **PK** Período de referencia del dato, expresado en formato AAAAMM (meses) |
-| `anio` | number |  | **PK** Año correspondiente al período de referencia del dato |
-| `mes` | number |  | **PK** Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre) |
-| `tipo_de_indicador` | string |  | **PK** Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio |
-| `tipo_de_indicador_descripcion` | string |  | **PK** Descripción del tipo de indicador |
-| `region` | string |  | **PK** Región estadística a la que corresponde el dato |
-| `unidad_de_medida` | string |  | **PK** Unidad en la que se expresa el valor del indicador |
-| `valor` | number | sí | Valor del indicador para el período y las categorías informadas |
-| `observaciones` | string | sí | Notas necesarias para el valor informado |
-
-## indice_salarios
-
-**Índice de salarios** — Dirección de Índices de Precios de la Producción
-
-El índice de salarios estima la evolución de los salarios pagados en la economía aislando el indicador de variaciones relacionadas con conceptos tales como la cantidad de horas trabajadas, descuentos por ausentismo, premios por productividad y todo otro concepto asociado al desempeño o a las características de los individuos concretos. La serie muestra la evolución de los salarios pagados en los sectores privado registrado y público desde noviembre de 2015. A partir de octubre de 2016 se incorporó la serie del sector privado no registrado y el cálculo del índice de salarios total, que resulta de la agregación de los índices de salarios de los componentes mencionados. Para más información, se puede consultar la metodología INDEC N° 16, Índice de salarios y coeficiente de variación salarial, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/sociedad/cvs_metodologia.pdf
-
-- Clave primaria (usala completa en `order` para paginar): `clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,unidad_de_medida`
-- Traer todo: `GET /indice_salarios?order=clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,unidad_de_medida&limit=1000&offset=0`
-
-| Columna | Tipo | Nulo | Descripción |
-|---|---|---|---|
-| `clasificador` | string |  | **PK** Clasificador utilizado para organizar y codificar las categorías del dato |
-| `nivel` | string |  | **PK** Nivel de desagregación de la categoría dentro de la estructura del clasificador |
-| `codigo` | string |  | **PK** Código asignado a la categoría de acuerdo con el clasificador utilizado |
-| `descripcion` | string |  | **PK** Denominación de la categoría correspondiente al código informado |
-| `periodo` | string |  | **PK** Período de referencia del dato, expresado en formato AAAAMM (meses) |
-| `anio` | number |  | **PK** Año correspondiente al período de referencia del dato |
-| `mes` | number |  | **PK** Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre) |
-| `indicador` | string |  | **PK** Nombre del indicador estadístico |
-| `tipo_de_indicador` | string |  | **PK** Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio |
-| `tipo_de_indicador_descripcion` | string |  | **PK** Descripción del tipo de indicador |
-| `unidad_de_medida` | string |  | **PK** Unidad en la que se expresa el valor del indicador |
-| `valor` | string | sí | Valor del indicador para el período y las categorías informadas |
-| `observaciones` | string | sí | Notas necesarias para el valor informado |
-
-## icc_precios_construccion
-
-**Índice del costo de la construcción** — Dirección de Índices de Precios de la Producción
-
-Índice del costo de la construcción (ICC) en el Gran Buenos Aires, base 1993. Este endpoint contiene información desde noviembre de 2015. Para más información, se puede consultar la metodología INDEC N° 9, Índice del Costo de la Construcción en el Gran Buenos Aires, base 1993, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_icc.pdf
-
-- Clave primaria (usala completa en `order` para paginar): `indicador,codigo_apertura,codigo_CPC_1,clasificador,nivel,descripcion,periodo,anio,mes,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida`
-- Traer todo: `GET /icc_precios_construccion?order=indicador,codigo_apertura,codigo_CPC_1,clasificador,nivel,descripcion,periodo,anio,mes,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida&limit=1000&offset=0`
-
-| Columna | Tipo | Nulo | Descripción |
-|---|---|---|---|
-| `indicador` | string |  | **PK** Nombre del indicador estadístico |
-| `codigo_apertura` | string |  | **PK** Código que identifica el nivel de apertura o desagregación del dato |
-| `codigo_CPC_1` | string |  | **PK** Código de la Clasificación Central Provisional de Productos (CPC) elaborada por la Organización de las Naciones Unidas. |
-| `clasificador` | string |  | **PK** Clasificador utilizado para organizar y codificar las categorías del dato |
-| `nivel` | string |  | **PK** Nivel de desagregación de la categoría dentro de la estructura del clasificador |
 | `descripcion` | string |  | **PK** Denominación de la categoría correspondiente al código informado |
 | `periodo` | string |  | **PK** Período de referencia del dato, expresado en formato AAAAMM (meses) |
 | `anio` | number |  | **PK** Año correspondiente al período de referencia del dato |
@@ -390,7 +390,7 @@ Principales tasas del mercado de trabajo estimadas a partir de la Encuesta Perma
 
 **Valorización de la canasta de crianza** — Dirección Nacional de Estadísticas de Condiciones de Vida
 
-Valorización mensual de la canasta de crianza de la primera infancia, la niñez y la adolescencia. Está conformada por el costo de los bienes y servicios, y la valorización del tiempo de cuidado. La estimación se realiza para cuatro tramos de edad: menores de 1 año, de 1 a 3 años, de 4 a 5 años y de 6 a 12 años. Gran Buenos Aires. Este endpoint contiene información desde mayo de 2023. Para más información sobre la canasta de crianza, se puede consultar el siguiente enlace: https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-173
+Valorización mensual de la canasta de crianza de la primera infancia, la niñez y la adolescencia. Está conformada por el costo de los bienes y servicios, y la valorización del tiempo de cuidado. La estimación se realiza para cuatro tramos de edad: menores de 1 año, de 1 a 3 años, de 4 a 5 años y de 6 a 12 años. Gran Buenos Aires. Este endpoint contiene información desde enero de 2020. Para más información sobre la canasta de crianza, se puede consultar el siguiente enlace: https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-173
 
 - Clave primaria (usala completa en `order` para paginar): `Periodo`
 - Traer todo: `GET /canasta-crianza?order=Periodo&limit=1000&offset=0`

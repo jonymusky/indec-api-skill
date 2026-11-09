@@ -266,6 +266,82 @@
           }
         }
       },
+      "ipc_nacional": {
+        "type": "object",
+        "description": "Índice de precios al consumidor (IPC) de la República Argentina, con aperturas por región, división, grupo, clase y subclase, desde diciembre de 2016.\nPara más información, se puede consultar la metodología INDEC N° 32, Índice de precios al consumidor (IPC). Base diciembre 2016=100, a través del siguiente enlace:\nhttps://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipc_nacional_2019.pdf",
+        "properties": {
+          "clasificador": {
+            "description": "Clasificador utilizado para organizar y codificar las categorías del dato",
+            "type": "string"
+          },
+          "nivel": {
+            "description": "Nivel de desagregación de la categoría dentro de la estructura del clasificador",
+            "type": "string"
+          },
+          "codigo": {
+            "description": "Código asignado a la categoría de acuerdo con el clasificador utilizado",
+            "type": "string"
+          },
+          "descripcion": {
+            "description": "Denominación de la categoría correspondiente al código informado",
+            "type": "string"
+          },
+          "periodo": {
+            "description": "Período de referencia del dato, expresado en formato AAAAMM (meses)",
+            "type": "string"
+          },
+          "anio": {
+            "description": "Año correspondiente al período de referencia del dato",
+            "type": "number"
+          },
+          "mes": {
+            "description": "Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre)",
+            "type": "number"
+          },
+          "indicador": {
+            "description": "Nombre del indicador estadístico",
+            "type": "string"
+          },
+          "tipo_de_indicador": {
+            "description": "Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio\n",
+            "type": "string"
+          },
+          "tipo_de_indicador_descripcion": {
+            "description": "Descripción del tipo de indicador",
+            "type": "string"
+          },
+          "region": {
+            "description": "Región estadística a la que corresponde el dato",
+            "type": "string"
+          },
+          "unidad_de_medida": {
+            "description": "Unidad en la que se expresa el valor del indicador",
+            "type": "string"
+          },
+          "valor": {
+            "description": "Valor del indicador para el período y las categorías informadas",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "observaciones": {
+            "description": "Notas necesarias para el valor informado",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
       "valorizacion_canastas_cba_cbt": {
         "type": "object",
         "description": "Valorización mensual de la canasta básica alimentaria (CBA) y de la canasta básica total (CBT) desde abril de 2016. Gran Buenos Aires.\nPara más información, se puede consultar la metodología INDEC N° 22, La medición de la pobreza y la indigencia en la Argentina, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/sociedad/EPH_metodologia_22_pobreza.pdf",
@@ -342,9 +418,9 @@
           }
         }
       },
-      "ipc_nacional": {
+      "indice_salarios": {
         "type": "object",
-        "description": "Índice de precios al consumidor (IPC) de la República Argentina, con aperturas por región, división, grupo, clase y subclase, desde diciembre de 2016.\nPara más información, se puede consultar la metodología INDEC N° 32, Índice de precios al consumidor (IPC). Base diciembre 2016=100, a través del siguiente enlace:\nhttps://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipc_nacional_2019.pdf",
+        "description": "El índice de salarios estima la evolución de los salarios pagados en la economía aislando el indicador de variaciones relacionadas con conceptos tales como la cantidad de horas trabajadas, descuentos por ausentismo, premios por productividad y todo otro concepto asociado al desempeño o a las características de los individuos concretos.\n \nLa serie muestra la evolución de los salarios pagados en los sectores privado registrado y público desde noviembre de 2015. A partir de octubre de 2016 se incorporó la serie del sector privado no registrado y el cálculo del índice de salarios total, que resulta de la agregación de los índices de salarios de los componentes mencionados.\n \nPara más información, se puede consultar la metodología INDEC N° 16, Índice de salarios y coeficiente de variación salarial, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/sociedad/cvs_metodologia.pdf",
         "properties": {
           "clasificador": {
             "description": "Clasificador utilizado para organizar y codificar las categorías del dato",
@@ -379,7 +455,83 @@
             "type": "string"
           },
           "tipo_de_indicador": {
-            "description": "Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio\n",
+            "description": "Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio",
+            "type": "string"
+          },
+          "tipo_de_indicador_descripcion": {
+            "description": "Descripción del tipo de indicador",
+            "type": "string"
+          },
+          "unidad_de_medida": {
+            "description": "Unidad en la que se expresa el valor del indicador",
+            "type": "string"
+          },
+          "valor": {
+            "description": "Valor del indicador para el período y las categorías informadas",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "observaciones": {
+            "description": "Notas necesarias para el valor informado ",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "icc_precios_construccion": {
+        "type": "object",
+        "description": "Índice del costo de la construcción (ICC) en el Gran Buenos Aires, base 1993. \nEste endpoint contiene información desde noviembre de 2015.\nPara más información, se puede consultar la metodología INDEC N°  9, Índice del Costo de la Construcción en el Gran Buenos Aires, base 1993, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_icc.pdf ",
+        "properties": {
+          "indicador": {
+            "description": "Nombre del indicador estadístico",
+            "type": "string"
+          },
+          "codigo_apertura": {
+            "description": "Código que identifica el nivel de apertura o desagregación del dato",
+            "type": "string"
+          },
+          "codigo_CPC_1": {
+            "description": "Código de la Clasificación Central Provisional de Productos (CPC) elaborada por la Organización de las Naciones Unidas. ",
+            "type": "string"
+          },
+          "clasificador": {
+            "description": "Clasificador utilizado para organizar y codificar las categorías del dato",
+            "type": "string"
+          },
+          "nivel": {
+            "description": "Nivel de desagregación de la categoría dentro de la estructura del clasificador",
+            "type": "string"
+          },
+          "descripcion": {
+            "description": "Denominación de la categoría correspondiente al código informado",
+            "type": "string"
+          },
+          "periodo": {
+            "description": "Período de referencia del dato, expresado en formato AAAAMM (meses)",
+            "type": "string"
+          },
+          "anio": {
+            "description": "Año correspondiente al período de referencia del dato",
+            "type": "number"
+          },
+          "mes": {
+            "description": "Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre)",
+            "type": "number"
+          },
+          "tipo_de_indicador": {
+            "description": "Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio",
             "type": "string"
           },
           "tipo_de_indicador_descripcion": {
@@ -406,7 +558,7 @@
             ]
           },
           "observaciones": {
-            "description": "Notas necesarias para el valor informado",
+            "description": "Notas necesarias para el valor informado ",
             "anyOf": [
               {
                 "type": "string"
@@ -601,158 +753,6 @@
           },
           "observaciones": {
             "description": "Notas necesarias para el valor informado",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        }
-      },
-      "indice_salarios": {
-        "type": "object",
-        "description": "El índice de salarios estima la evolución de los salarios pagados en la economía aislando el indicador de variaciones relacionadas con conceptos tales como la cantidad de horas trabajadas, descuentos por ausentismo, premios por productividad y todo otro concepto asociado al desempeño o a las características de los individuos concretos.\n \nLa serie muestra la evolución de los salarios pagados en los sectores privado registrado y público desde noviembre de 2015. A partir de octubre de 2016 se incorporó la serie del sector privado no registrado y el cálculo del índice de salarios total, que resulta de la agregación de los índices de salarios de los componentes mencionados.\n \nPara más información, se puede consultar la metodología INDEC N° 16, Índice de salarios y coeficiente de variación salarial, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/sociedad/cvs_metodologia.pdf",
-        "properties": {
-          "clasificador": {
-            "description": "Clasificador utilizado para organizar y codificar las categorías del dato",
-            "type": "string"
-          },
-          "nivel": {
-            "description": "Nivel de desagregación de la categoría dentro de la estructura del clasificador",
-            "type": "string"
-          },
-          "codigo": {
-            "description": "Código asignado a la categoría de acuerdo con el clasificador utilizado",
-            "type": "string"
-          },
-          "descripcion": {
-            "description": "Denominación de la categoría correspondiente al código informado",
-            "type": "string"
-          },
-          "periodo": {
-            "description": "Período de referencia del dato, expresado en formato AAAAMM (meses)",
-            "type": "string"
-          },
-          "anio": {
-            "description": "Año correspondiente al período de referencia del dato",
-            "type": "number"
-          },
-          "mes": {
-            "description": "Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre)",
-            "type": "number"
-          },
-          "indicador": {
-            "description": "Nombre del indicador estadístico",
-            "type": "string"
-          },
-          "tipo_de_indicador": {
-            "description": "Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio",
-            "type": "string"
-          },
-          "tipo_de_indicador_descripcion": {
-            "description": "Descripción del tipo de indicador",
-            "type": "string"
-          },
-          "unidad_de_medida": {
-            "description": "Unidad en la que se expresa el valor del indicador",
-            "type": "string"
-          },
-          "valor": {
-            "description": "Valor del indicador para el período y las categorías informadas",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "observaciones": {
-            "description": "Notas necesarias para el valor informado ",
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          }
-        }
-      },
-      "icc_precios_construccion": {
-        "type": "object",
-        "description": "Índice del costo de la construcción (ICC) en el Gran Buenos Aires, base 1993. \nEste endpoint contiene información desde noviembre de 2015.\nPara más información, se puede consultar la metodología INDEC N°  9, Índice del Costo de la Construcción en el Gran Buenos Aires, base 1993, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_icc.pdf ",
-        "properties": {
-          "indicador": {
-            "description": "Nombre del indicador estadístico",
-            "type": "string"
-          },
-          "codigo_apertura": {
-            "description": "Código que identifica el nivel de apertura o desagregación del dato",
-            "type": "string"
-          },
-          "codigo_CPC_1": {
-            "description": "Código de la Clasificación Central Provisional de Productos (CPC) elaborada por la Organización de las Naciones Unidas. ",
-            "type": "string"
-          },
-          "clasificador": {
-            "description": "Clasificador utilizado para organizar y codificar las categorías del dato",
-            "type": "string"
-          },
-          "nivel": {
-            "description": "Nivel de desagregación de la categoría dentro de la estructura del clasificador",
-            "type": "string"
-          },
-          "descripcion": {
-            "description": "Denominación de la categoría correspondiente al código informado",
-            "type": "string"
-          },
-          "periodo": {
-            "description": "Período de referencia del dato, expresado en formato AAAAMM (meses)",
-            "type": "string"
-          },
-          "anio": {
-            "description": "Año correspondiente al período de referencia del dato",
-            "type": "number"
-          },
-          "mes": {
-            "description": "Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre)",
-            "type": "number"
-          },
-          "tipo_de_indicador": {
-            "description": "Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio",
-            "type": "string"
-          },
-          "tipo_de_indicador_descripcion": {
-            "description": "Descripción del tipo de indicador",
-            "type": "string"
-          },
-          "region": {
-            "description": "Región estadística a la que corresponde el dato",
-            "type": "string"
-          },
-          "unidad_de_medida": {
-            "description": "Unidad en la que se expresa el valor del indicador",
-            "type": "string"
-          },
-          "valor": {
-            "description": "Valor del indicador para el período y las categorías informadas",
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "observaciones": {
-            "description": "Notas necesarias para el valor informado ",
             "anyOf": [
               {
                 "type": "string"
@@ -1097,7 +1097,7 @@
       },
       "canasta-crianza": {
         "type": "object",
-        "description": "Valorización mensual de la canasta de crianza de la primera infancia, la niñez y la adolescencia. Está conformada por el costo de los bienes y servicios, y la valorización del tiempo de cuidado. La estimación se realiza para cuatro tramos de edad: menores de 1 año, de 1 a 3 años, de 4 a 5 años y de 6 a 12 años. \n\nGran Buenos Aires.\n\nEste endpoint contiene información desde mayo de 2023. \n\nPara más información sobre la canasta de crianza, se puede consultar el siguiente enlace: https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-173\n",
+        "description": "Valorización mensual de la canasta de crianza de la primera infancia, la niñez y la adolescencia. Está conformada por el costo de los bienes y servicios, y la valorización del tiempo de cuidado. La estimación se realiza para cuatro tramos de edad: menores de 1 año, de 1 a 3 años, de 4 a 5 años y de 6 a 12 años. \n\nGran Buenos Aires.\n\nEste endpoint contiene información desde enero de 2020. \n\nPara más información sobre la canasta de crianza, se puede consultar el siguiente enlace: https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-173\n",
         "properties": {
           "anio": {
             "description": "Año correspondiente al período de referencia del dato",
@@ -2542,6 +2542,270 @@
         }
       }
     },
+    "/ipc_nacional": {
+      "get": {
+        "tags": [
+          "Dirección de Índices de Precios de Consumo"
+        ],
+        "summary": "Índice de Precios al Consumidor (IPC)",
+        "description": "Índice de precios al consumidor (IPC) de la República Argentina, con aperturas por región, división, grupo, clase y subclase, desde diciembre de 2016.\nPara más información, se puede consultar la metodología INDEC N° 32, Índice de precios al consumidor (IPC). Base diciembre 2016=100, a través del siguiente enlace:\nhttps://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipc_nacional_2019.pdf\n\n### Ejemplos de uso para esta tabla\n\n- **Obtener todo (paginado):**\n  `GET /ipc_nacional?order=clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida&limit=1000&offset=0`\n- **Buscar texto en clasificador (contiene 'valor'):**\n                      `GET /ipc_nacional?clasificador=ilike.*valor*`\n- **Buscar texto en nivel (contiene 'valor'):**\n                      `GET /ipc_nacional?nivel=ilike.*valor*`\n- **Buscar texto en codigo (contiene 'valor'):**\n                      `GET /ipc_nacional?codigo=ilike.*valor*`\n- **Buscar texto en descripcion (contiene 'valor'):**\n                      `GET /ipc_nacional?descripcion=ilike.*valor*`\n- **Seleccionar columnas específicas:**\n                  `GET /ipc_nacional?select=clasificador,nivel`\n\n### Clave primaria\n\nEstas columnas identifican de forma única cada fila: `clasificador`, `nivel`, `codigo`, `descripcion`, `periodo`, `anio`, `mes`, `indicador`, `tipo_de_indicador`, `tipo_de_indicador_descripcion`, `region`, `unidad_de_medida`",
+        "operationId": "get_ipc_nacional",
+        "x-sidebar-title": "ipc_nacional",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Selección vertical (columnas). Ej: id,nombre",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordenamiento. Ej: id.desc,fecha.asc. Para paginar, incluya la clave completa: clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Límite de filas (máximo 1000)",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Desplazamiento de filas",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "count=exact para obtener el total de filas (ver Paginación)",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=exact"
+              ]
+            }
+          },
+          {
+            "name": "clasificador",
+            "in": "query",
+            "description": "Filtro para Clasificador utilizado para organizar y codificar las categorías del dato.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "nivel",
+            "in": "query",
+            "description": "Filtro para Nivel de desagregación de la categoría dentro de la estructura del clasificador.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "codigo",
+            "in": "query",
+            "description": "Filtro para Código asignado a la categoría de acuerdo con el clasificador utilizado.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "descripcion",
+            "in": "query",
+            "description": "Filtro para Denominación de la categoría correspondiente al código informado.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "periodo",
+            "in": "query",
+            "description": "Filtro para Período de referencia del dato, expresado en formato AAAAMM (meses).                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "anio",
+            "in": "query",
+            "description": "Filtro para Año correspondiente al período de referencia del dato.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "number"
+            },
+            "explode": true
+          },
+          {
+            "name": "mes",
+            "in": "query",
+            "description": "Filtro para Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre).                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "number"
+            },
+            "explode": true
+          },
+          {
+            "name": "indicador",
+            "in": "query",
+            "description": "Filtro para Nombre del indicador estadístico.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "tipo_de_indicador",
+            "in": "query",
+            "description": "Filtro para Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio\n.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "tipo_de_indicador_descripcion",
+            "in": "query",
+            "description": "Filtro para Descripción del tipo de indicador.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "description": "Filtro para Región estadística a la que corresponde el dato.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "unidad_de_medida",
+            "in": "query",
+            "description": "Filtro para Unidad en la que se expresa el valor del indicador.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "valor",
+            "in": "query",
+            "description": "Filtro para Valor del indicador para el período y las categorías informadas.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "number"
+            },
+            "explode": true
+          },
+          {
+            "name": "observaciones",
+            "in": "query",
+            "description": "Filtro para Notas necesarias para el valor informado.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta exitosa",
+            "headers": {
+              "Content-Range": {
+                "description": "Rango devuelto y total de filas (ver Paginación)",
+                "schema": {
+                  "type": "string",
+                  "example": "0-99/103545"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ipc_nacional"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Resultado parcial con count=exact (ver Paginación)",
+            "headers": {
+              "Content-Range": {
+                "description": "Rango devuelto y total de filas (ver Paginación)",
+                "schema": {
+                  "type": "string",
+                  "example": "0-99/103545"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ipc_nacional"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Consulta inválida (ver Errores)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No autorizado (Token faltante o inválido)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Prohibido (Sin permisos de acceso)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/valorizacion_canastas_cba_cbt": {
       "get": {
         "tags": [
@@ -2806,15 +3070,15 @@
         }
       }
     },
-    "/ipc_nacional": {
+    "/indice_salarios": {
       "get": {
         "tags": [
-          "Dirección de Índices de Precios de Consumo"
+          "Dirección de Índices de Precios de la Producción"
         ],
-        "summary": "Índice de Precios al Consumidor (IPC)",
-        "description": "Índice de precios al consumidor (IPC) de la República Argentina, con aperturas por región, división, grupo, clase y subclase, desde diciembre de 2016.\nPara más información, se puede consultar la metodología INDEC N° 32, Índice de precios al consumidor (IPC). Base diciembre 2016=100, a través del siguiente enlace:\nhttps://www.indec.gob.ar/ftp/cuadros/economia/metodologia_ipc_nacional_2019.pdf\n\n### Ejemplos de uso para esta tabla\n\n- **Obtener todo (paginado):**\n  `GET /ipc_nacional?order=clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida&limit=1000&offset=0`\n- **Buscar texto en clasificador (contiene 'valor'):**\n                      `GET /ipc_nacional?clasificador=ilike.*valor*`\n- **Buscar texto en nivel (contiene 'valor'):**\n                      `GET /ipc_nacional?nivel=ilike.*valor*`\n- **Buscar texto en codigo (contiene 'valor'):**\n                      `GET /ipc_nacional?codigo=ilike.*valor*`\n- **Buscar texto en descripcion (contiene 'valor'):**\n                      `GET /ipc_nacional?descripcion=ilike.*valor*`\n- **Seleccionar columnas específicas:**\n                  `GET /ipc_nacional?select=clasificador,nivel`\n\n### Clave primaria\n\nEstas columnas identifican de forma única cada fila: `clasificador`, `nivel`, `codigo`, `descripcion`, `periodo`, `anio`, `mes`, `indicador`, `tipo_de_indicador`, `tipo_de_indicador_descripcion`, `region`, `unidad_de_medida`",
-        "operationId": "get_ipc_nacional",
-        "x-sidebar-title": "ipc_nacional",
+        "summary": "Índice de salarios",
+        "description": "El índice de salarios estima la evolución de los salarios pagados en la economía aislando el indicador de variaciones relacionadas con conceptos tales como la cantidad de horas trabajadas, descuentos por ausentismo, premios por productividad y todo otro concepto asociado al desempeño o a las características de los individuos concretos.\n \nLa serie muestra la evolución de los salarios pagados en los sectores privado registrado y público desde noviembre de 2015. A partir de octubre de 2016 se incorporó la serie del sector privado no registrado y el cálculo del índice de salarios total, que resulta de la agregación de los índices de salarios de los componentes mencionados.\n \nPara más información, se puede consultar la metodología INDEC N° 16, Índice de salarios y coeficiente de variación salarial, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/sociedad/cvs_metodologia.pdf\n\n### Ejemplos de uso para esta tabla\n\n- **Obtener todo (paginado):**\n  `GET /indice_salarios?order=clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,unidad_de_medida&limit=1000&offset=0`\n- **Buscar texto en clasificador (contiene 'valor'):**\n                      `GET /indice_salarios?clasificador=ilike.*valor*`\n- **Buscar texto en nivel (contiene 'valor'):**\n                      `GET /indice_salarios?nivel=ilike.*valor*`\n- **Buscar texto en codigo (contiene 'valor'):**\n                      `GET /indice_salarios?codigo=ilike.*valor*`\n- **Buscar texto en descripcion (contiene 'valor'):**\n                      `GET /indice_salarios?descripcion=ilike.*valor*`\n- **Seleccionar columnas específicas:**\n                  `GET /indice_salarios?select=clasificador,nivel`\n\n### Clave primaria\n\nEstas columnas identifican de forma única cada fila: `clasificador`, `nivel`, `codigo`, `descripcion`, `periodo`, `anio`, `mes`, `indicador`, `tipo_de_indicador`, `tipo_de_indicador_descripcion`, `unidad_de_medida`",
+        "operationId": "get_indice_salarios",
+        "x-sidebar-title": "indice_salarios",
         "security": [
           {
             "BearerAuth": []
@@ -2832,7 +3096,7 @@
           {
             "name": "order",
             "in": "query",
-            "description": "Ordenamiento. Ej: id.desc,fecha.asc. Para paginar, incluya la clave completa: clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida",
+            "description": "Ordenamiento. Ej: id.desc,fecha.asc. Para paginar, incluya la clave completa: clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,unidad_de_medida",
             "schema": {
               "type": "string"
             }
@@ -2940,7 +3204,271 @@
           {
             "name": "tipo_de_indicador",
             "in": "query",
-            "description": "Filtro para Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio\n.                     Use operadores como eq, gt, ilike.",
+            "description": "Filtro para Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "tipo_de_indicador_descripcion",
+            "in": "query",
+            "description": "Filtro para Descripción del tipo de indicador.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "unidad_de_medida",
+            "in": "query",
+            "description": "Filtro para Unidad en la que se expresa el valor del indicador.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "valor",
+            "in": "query",
+            "description": "Filtro para Valor del indicador para el período y las categorías informadas.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "number"
+            },
+            "explode": true
+          },
+          {
+            "name": "observaciones",
+            "in": "query",
+            "description": "Filtro para Notas necesarias para el valor informado .                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Consulta exitosa",
+            "headers": {
+              "Content-Range": {
+                "description": "Rango devuelto y total de filas (ver Paginación)",
+                "schema": {
+                  "type": "string",
+                  "example": "0-99/103545"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/indice_salarios"
+                  }
+                }
+              }
+            }
+          },
+          "206": {
+            "description": "Resultado parcial con count=exact (ver Paginación)",
+            "headers": {
+              "Content-Range": {
+                "description": "Rango devuelto y total de filas (ver Paginación)",
+                "schema": {
+                  "type": "string",
+                  "example": "0-99/103545"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/indice_salarios"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Consulta inválida (ver Errores)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No autorizado (Token faltante o inválido)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Prohibido (Sin permisos de acceso)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/icc_precios_construccion": {
+      "get": {
+        "tags": [
+          "Dirección de Índices de Precios de la Producción"
+        ],
+        "summary": "Índice del costo de la construcción",
+        "description": "Índice del costo de la construcción (ICC) en el Gran Buenos Aires, base 1993. \nEste endpoint contiene información desde noviembre de 2015.\nPara más información, se puede consultar la metodología INDEC N°  9, Índice del Costo de la Construcción en el Gran Buenos Aires, base 1993, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_icc.pdf \n\n### Ejemplos de uso para esta tabla\n\n- **Obtener todo (paginado):**\n  `GET /icc_precios_construccion?order=indicador,codigo_apertura,codigo_CPC_1,clasificador,nivel,descripcion,periodo,anio,mes,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida&limit=1000&offset=0`\n- **Buscar texto en indicador (contiene 'valor'):**\n                      `GET /icc_precios_construccion?indicador=ilike.*valor*`\n- **Buscar texto en codigo_apertura (contiene 'valor'):**\n                      `GET /icc_precios_construccion?codigo_apertura=ilike.*valor*`\n- **Buscar texto en codigo_CPC_1 (contiene 'valor'):**\n                      `GET /icc_precios_construccion?codigo_CPC_1=ilike.*valor*`\n- **Buscar texto en clasificador (contiene 'valor'):**\n                      `GET /icc_precios_construccion?clasificador=ilike.*valor*`\n- **Seleccionar columnas específicas:**\n                  `GET /icc_precios_construccion?select=indicador,codigo_apertura`\n\n### Clave primaria\n\nEstas columnas identifican de forma única cada fila: `indicador`, `codigo_apertura`, `codigo_CPC_1`, `clasificador`, `nivel`, `descripcion`, `periodo`, `anio`, `mes`, `tipo_de_indicador`, `tipo_de_indicador_descripcion`, `region`, `unidad_de_medida`",
+        "operationId": "get_icc_precios_construccion",
+        "x-sidebar-title": "icc_precios_construccion",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "select",
+            "in": "query",
+            "description": "Selección vertical (columnas). Ej: id,nombre",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Ordenamiento. Ej: id.desc,fecha.asc. Para paginar, incluya la clave completa: indicador,codigo_apertura,codigo_CPC_1,clasificador,nivel,descripcion,periodo,anio,mes,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Límite de filas (máximo 1000)",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Desplazamiento de filas",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "count=exact para obtener el total de filas (ver Paginación)",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "count=exact"
+              ]
+            }
+          },
+          {
+            "name": "indicador",
+            "in": "query",
+            "description": "Filtro para Nombre del indicador estadístico.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "codigo_apertura",
+            "in": "query",
+            "description": "Filtro para Código que identifica el nivel de apertura o desagregación del dato.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "codigo_CPC_1",
+            "in": "query",
+            "description": "Filtro para Código de la Clasificación Central Provisional de Productos (CPC) elaborada por la Organización de las Naciones Unidas. .                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "clasificador",
+            "in": "query",
+            "description": "Filtro para Clasificador utilizado para organizar y codificar las categorías del dato.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "nivel",
+            "in": "query",
+            "description": "Filtro para Nivel de desagregación de la categoría dentro de la estructura del clasificador.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "descripcion",
+            "in": "query",
+            "description": "Filtro para Denominación de la categoría correspondiente al código informado.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "periodo",
+            "in": "query",
+            "description": "Filtro para Período de referencia del dato, expresado en formato AAAAMM (meses).                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": true
+          },
+          {
+            "name": "anio",
+            "in": "query",
+            "description": "Filtro para Año correspondiente al período de referencia del dato.                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "number"
+            },
+            "explode": true
+          },
+          {
+            "name": "mes",
+            "in": "query",
+            "description": "Filtro para Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre).                     Use operadores como eq, gt, ilike.",
+            "schema": {
+              "type": "number"
+            },
+            "explode": true
+          },
+          {
+            "name": "tipo_de_indicador",
+            "in": "query",
+            "description": "Filtro para Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio.                     Use operadores como eq, gt, ilike.",
             "schema": {
               "type": "string"
             },
@@ -2985,7 +3513,7 @@
           {
             "name": "observaciones",
             "in": "query",
-            "description": "Filtro para Notas necesarias para el valor informado.                     Use operadores como eq, gt, ilike.",
+            "description": "Filtro para Notas necesarias para el valor informado .                     Use operadores como eq, gt, ilike.",
             "schema": {
               "type": "string"
             },
@@ -3009,7 +3537,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ipc_nacional"
+                    "$ref": "#/components/schemas/icc_precios_construccion"
                   }
                 }
               }
@@ -3031,7 +3559,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/ipc_nacional"
+                    "$ref": "#/components/schemas/icc_precios_construccion"
                   }
                 }
               }
@@ -3623,534 +4151,6 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/sipm_precios_mayoristas"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Consulta inválida (ver Errores)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "No autorizado (Token faltante o inválido)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Prohibido (Sin permisos de acceso)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/indice_salarios": {
-      "get": {
-        "tags": [
-          "Dirección de Índices de Precios de la Producción"
-        ],
-        "summary": "Índice de salarios",
-        "description": "El índice de salarios estima la evolución de los salarios pagados en la economía aislando el indicador de variaciones relacionadas con conceptos tales como la cantidad de horas trabajadas, descuentos por ausentismo, premios por productividad y todo otro concepto asociado al desempeño o a las características de los individuos concretos.\n \nLa serie muestra la evolución de los salarios pagados en los sectores privado registrado y público desde noviembre de 2015. A partir de octubre de 2016 se incorporó la serie del sector privado no registrado y el cálculo del índice de salarios total, que resulta de la agregación de los índices de salarios de los componentes mencionados.\n \nPara más información, se puede consultar la metodología INDEC N° 16, Índice de salarios y coeficiente de variación salarial, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/sociedad/cvs_metodologia.pdf\n\n### Ejemplos de uso para esta tabla\n\n- **Obtener todo (paginado):**\n  `GET /indice_salarios?order=clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,unidad_de_medida&limit=1000&offset=0`\n- **Buscar texto en clasificador (contiene 'valor'):**\n                      `GET /indice_salarios?clasificador=ilike.*valor*`\n- **Buscar texto en nivel (contiene 'valor'):**\n                      `GET /indice_salarios?nivel=ilike.*valor*`\n- **Buscar texto en codigo (contiene 'valor'):**\n                      `GET /indice_salarios?codigo=ilike.*valor*`\n- **Buscar texto en descripcion (contiene 'valor'):**\n                      `GET /indice_salarios?descripcion=ilike.*valor*`\n- **Seleccionar columnas específicas:**\n                  `GET /indice_salarios?select=clasificador,nivel`\n\n### Clave primaria\n\nEstas columnas identifican de forma única cada fila: `clasificador`, `nivel`, `codigo`, `descripcion`, `periodo`, `anio`, `mes`, `indicador`, `tipo_de_indicador`, `tipo_de_indicador_descripcion`, `unidad_de_medida`",
-        "operationId": "get_indice_salarios",
-        "x-sidebar-title": "indice_salarios",
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "select",
-            "in": "query",
-            "description": "Selección vertical (columnas). Ej: id,nombre",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Ordenamiento. Ej: id.desc,fecha.asc. Para paginar, incluya la clave completa: clasificador,nivel,codigo,descripcion,periodo,anio,mes,indicador,tipo_de_indicador,tipo_de_indicador_descripcion,unidad_de_medida",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Límite de filas (máximo 1000)",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "Desplazamiento de filas",
-            "schema": {
-              "type": "integer",
-              "default": 0
-            }
-          },
-          {
-            "name": "Prefer",
-            "in": "header",
-            "description": "count=exact para obtener el total de filas (ver Paginación)",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "count=exact"
-              ]
-            }
-          },
-          {
-            "name": "clasificador",
-            "in": "query",
-            "description": "Filtro para Clasificador utilizado para organizar y codificar las categorías del dato.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "nivel",
-            "in": "query",
-            "description": "Filtro para Nivel de desagregación de la categoría dentro de la estructura del clasificador.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "codigo",
-            "in": "query",
-            "description": "Filtro para Código asignado a la categoría de acuerdo con el clasificador utilizado.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "descripcion",
-            "in": "query",
-            "description": "Filtro para Denominación de la categoría correspondiente al código informado.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "periodo",
-            "in": "query",
-            "description": "Filtro para Período de referencia del dato, expresado en formato AAAAMM (meses).                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "anio",
-            "in": "query",
-            "description": "Filtro para Año correspondiente al período de referencia del dato.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "number"
-            },
-            "explode": true
-          },
-          {
-            "name": "mes",
-            "in": "query",
-            "description": "Filtro para Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre).                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "number"
-            },
-            "explode": true
-          },
-          {
-            "name": "indicador",
-            "in": "query",
-            "description": "Filtro para Nombre del indicador estadístico.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "tipo_de_indicador",
-            "in": "query",
-            "description": "Filtro para Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "tipo_de_indicador_descripcion",
-            "in": "query",
-            "description": "Filtro para Descripción del tipo de indicador.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "unidad_de_medida",
-            "in": "query",
-            "description": "Filtro para Unidad en la que se expresa el valor del indicador.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "valor",
-            "in": "query",
-            "description": "Filtro para Valor del indicador para el período y las categorías informadas.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "observaciones",
-            "in": "query",
-            "description": "Filtro para Notas necesarias para el valor informado .                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Consulta exitosa",
-            "headers": {
-              "Content-Range": {
-                "description": "Rango devuelto y total de filas (ver Paginación)",
-                "schema": {
-                  "type": "string",
-                  "example": "0-99/103545"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/indice_salarios"
-                  }
-                }
-              }
-            }
-          },
-          "206": {
-            "description": "Resultado parcial con count=exact (ver Paginación)",
-            "headers": {
-              "Content-Range": {
-                "description": "Rango devuelto y total de filas (ver Paginación)",
-                "schema": {
-                  "type": "string",
-                  "example": "0-99/103545"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/indice_salarios"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Consulta inválida (ver Errores)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "No autorizado (Token faltante o inválido)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Prohibido (Sin permisos de acceso)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/icc_precios_construccion": {
-      "get": {
-        "tags": [
-          "Dirección de Índices de Precios de la Producción"
-        ],
-        "summary": "Índice del costo de la construcción",
-        "description": "Índice del costo de la construcción (ICC) en el Gran Buenos Aires, base 1993. \nEste endpoint contiene información desde noviembre de 2015.\nPara más información, se puede consultar la metodología INDEC N°  9, Índice del Costo de la Construcción en el Gran Buenos Aires, base 1993, a través del siguiente enlace: https://www.indec.gob.ar/ftp/cuadros/economia/metodologia_icc.pdf \n\n### Ejemplos de uso para esta tabla\n\n- **Obtener todo (paginado):**\n  `GET /icc_precios_construccion?order=indicador,codigo_apertura,codigo_CPC_1,clasificador,nivel,descripcion,periodo,anio,mes,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida&limit=1000&offset=0`\n- **Buscar texto en indicador (contiene 'valor'):**\n                      `GET /icc_precios_construccion?indicador=ilike.*valor*`\n- **Buscar texto en codigo_apertura (contiene 'valor'):**\n                      `GET /icc_precios_construccion?codigo_apertura=ilike.*valor*`\n- **Buscar texto en codigo_CPC_1 (contiene 'valor'):**\n                      `GET /icc_precios_construccion?codigo_CPC_1=ilike.*valor*`\n- **Buscar texto en clasificador (contiene 'valor'):**\n                      `GET /icc_precios_construccion?clasificador=ilike.*valor*`\n- **Seleccionar columnas específicas:**\n                  `GET /icc_precios_construccion?select=indicador,codigo_apertura`\n\n### Clave primaria\n\nEstas columnas identifican de forma única cada fila: `indicador`, `codigo_apertura`, `codigo_CPC_1`, `clasificador`, `nivel`, `descripcion`, `periodo`, `anio`, `mes`, `tipo_de_indicador`, `tipo_de_indicador_descripcion`, `region`, `unidad_de_medida`",
-        "operationId": "get_icc_precios_construccion",
-        "x-sidebar-title": "icc_precios_construccion",
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "select",
-            "in": "query",
-            "description": "Selección vertical (columnas). Ej: id,nombre",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Ordenamiento. Ej: id.desc,fecha.asc. Para paginar, incluya la clave completa: indicador,codigo_apertura,codigo_CPC_1,clasificador,nivel,descripcion,periodo,anio,mes,tipo_de_indicador,tipo_de_indicador_descripcion,region,unidad_de_medida",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Límite de filas (máximo 1000)",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "offset",
-            "in": "query",
-            "description": "Desplazamiento de filas",
-            "schema": {
-              "type": "integer",
-              "default": 0
-            }
-          },
-          {
-            "name": "Prefer",
-            "in": "header",
-            "description": "count=exact para obtener el total de filas (ver Paginación)",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "count=exact"
-              ]
-            }
-          },
-          {
-            "name": "indicador",
-            "in": "query",
-            "description": "Filtro para Nombre del indicador estadístico.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "codigo_apertura",
-            "in": "query",
-            "description": "Filtro para Código que identifica el nivel de apertura o desagregación del dato.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "codigo_CPC_1",
-            "in": "query",
-            "description": "Filtro para Código de la Clasificación Central Provisional de Productos (CPC) elaborada por la Organización de las Naciones Unidas. .                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "clasificador",
-            "in": "query",
-            "description": "Filtro para Clasificador utilizado para organizar y codificar las categorías del dato.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "nivel",
-            "in": "query",
-            "description": "Filtro para Nivel de desagregación de la categoría dentro de la estructura del clasificador.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "descripcion",
-            "in": "query",
-            "description": "Filtro para Denominación de la categoría correspondiente al código informado.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "periodo",
-            "in": "query",
-            "description": "Filtro para Período de referencia del dato, expresado en formato AAAAMM (meses).                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "anio",
-            "in": "query",
-            "description": "Filtro para Año correspondiente al período de referencia del dato.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "number"
-            },
-            "explode": true
-          },
-          {
-            "name": "mes",
-            "in": "query",
-            "description": "Filtro para Número del mes correspondiente al período de referencia. Utiliza valores comprendidos entre 1 (enero) y 12 (diciembre).                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "number"
-            },
-            "explode": true
-          },
-          {
-            "name": "tipo_de_indicador",
-            "in": "query",
-            "description": "Filtro para Tipo de cálculo o presentación del indicador, como índice, variación intermensual, variación interanual, variación acumulada, incidencia o precio promedio.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "tipo_de_indicador_descripcion",
-            "in": "query",
-            "description": "Filtro para Descripción del tipo de indicador.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "region",
-            "in": "query",
-            "description": "Filtro para Región estadística a la que corresponde el dato.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "unidad_de_medida",
-            "in": "query",
-            "description": "Filtro para Unidad en la que se expresa el valor del indicador.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          },
-          {
-            "name": "valor",
-            "in": "query",
-            "description": "Filtro para Valor del indicador para el período y las categorías informadas.                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "number"
-            },
-            "explode": true
-          },
-          {
-            "name": "observaciones",
-            "in": "query",
-            "description": "Filtro para Notas necesarias para el valor informado .                     Use operadores como eq, gt, ilike.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": true
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Consulta exitosa",
-            "headers": {
-              "Content-Range": {
-                "description": "Rango devuelto y total de filas (ver Paginación)",
-                "schema": {
-                  "type": "string",
-                  "example": "0-99/103545"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/icc_precios_construccion"
-                  }
-                }
-              }
-            }
-          },
-          "206": {
-            "description": "Resultado parcial con count=exact (ver Paginación)",
-            "headers": {
-              "Content-Range": {
-                "description": "Rango devuelto y total de filas (ver Paginación)",
-                "schema": {
-                  "type": "string",
-                  "example": "0-99/103545"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/icc_precios_construccion"
                   }
                 }
               }
@@ -5107,7 +5107,7 @@
           "Dirección Nacional de Estadísticas de Condiciones de Vida"
         ],
         "summary": "Valorización de la canasta de crianza",
-        "description": "Valorización mensual de la canasta de crianza de la primera infancia, la niñez y la adolescencia. Está conformada por el costo de los bienes y servicios, y la valorización del tiempo de cuidado. La estimación se realiza para cuatro tramos de edad: menores de 1 año, de 1 a 3 años, de 4 a 5 años y de 6 a 12 años. \n\nGran Buenos Aires.\n\nEste endpoint contiene información desde mayo de 2023. \n\nPara más información sobre la canasta de crianza, se puede consultar el siguiente enlace: https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-173\n\n\n### Ejemplos de uso para esta tabla\n\n- **Obtener todo (paginado):**\n  `GET /canasta-crianza?order=Periodo&limit=1000&offset=0`\n- **Filtrar por anio mayor a 100:**\n                          `GET /canasta-crianza?anio=gt.100`\n- **Filtrar por Mes mayor a 100:**\n                          `GET /canasta-crianza?Mes=gt.100`\n- **Buscar texto en Periodo (contiene 'valor'):**\n                      `GET /canasta-crianza?Periodo=ilike.*valor*`\n- **Filtrar por bys_men1 mayor a 100:**\n                          `GET /canasta-crianza?bys_men1=gt.100`\n- **Seleccionar columnas específicas:**\n                  `GET /canasta-crianza?select=anio,Mes`\n\n### Clave primaria\n\nEstas columnas identifican de forma única cada fila: `Periodo`",
+        "description": "Valorización mensual de la canasta de crianza de la primera infancia, la niñez y la adolescencia. Está conformada por el costo de los bienes y servicios, y la valorización del tiempo de cuidado. La estimación se realiza para cuatro tramos de edad: menores de 1 año, de 1 a 3 años, de 4 a 5 años y de 6 a 12 años. \n\nGran Buenos Aires.\n\nEste endpoint contiene información desde enero de 2020. \n\nPara más información sobre la canasta de crianza, se puede consultar el siguiente enlace: https://www.indec.gob.ar/indec/web/Nivel4-Tema-4-43-173\n\n\n### Ejemplos de uso para esta tabla\n\n- **Obtener todo (paginado):**\n  `GET /canasta-crianza?order=Periodo&limit=1000&offset=0`\n- **Filtrar por anio mayor a 100:**\n                          `GET /canasta-crianza?anio=gt.100`\n- **Filtrar por Mes mayor a 100:**\n                          `GET /canasta-crianza?Mes=gt.100`\n- **Buscar texto en Periodo (contiene 'valor'):**\n                      `GET /canasta-crianza?Periodo=ilike.*valor*`\n- **Filtrar por bys_men1 mayor a 100:**\n                          `GET /canasta-crianza?bys_men1=gt.100`\n- **Seleccionar columnas específicas:**\n                  `GET /canasta-crianza?select=anio,Mes`\n\n### Clave primaria\n\nEstas columnas identifican de forma única cada fila: `Periodo`",
         "operationId": "get_canasta-crianza",
         "x-sidebar-title": "canasta-crianza",
         "security": [
