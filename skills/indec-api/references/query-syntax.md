@@ -84,7 +84,7 @@ rows = fetch_all("pobreza_eph", "area_geografica_nom,periodo", periodo="gte.2020
 ```python
 import pandas as pd
 df = pd.DataFrame(rows)
-df["valor"] = pd.to_numeric(df["valor"], errors="coerce")  # obligatorio en indice_salarios
+df["valor"] = pd.to_numeric(df["valor"], errors="coerce")  # por las dudas: indice_salarios lo devolvía como texto
 ```
 
 ### TypeScript (fetch)

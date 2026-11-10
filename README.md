@@ -31,7 +31,7 @@ falle en el primer intento y no sepa por qué:
 | Pagina con `order=periodo` | Filas duplicadas o perdidas entre páginas | Ordena siempre por la PK de cada tabla |
 | Adivina `region=eq.Nacional` | `[]` vacío, sin error | Flujo "descubrir con `distinct` → filtrar" |
 | Ve `valor: null` y lo ignora | Era `s` (secreto estadístico) o `*` (provisorio) | Lee `observaciones` y los signos convencionales |
-| Suma `valor` en `indice_salarios` | Concatena strings | Avisa que ahí `valor` es texto |
+| Suma `valor` en `indice_salarios` | Concatena strings si llega como texto | Avisa que conviene convertir `valor` a número |
 | Recibe `206` y lo trata como error | Era una respuesta parcial válida | Documenta `Prefer: count=exact` / `Content-Range` |
 
 ## Token

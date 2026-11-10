@@ -87,7 +87,8 @@ Si trabajás en otro lenguaje, la API es HTTP plano: ver `references/query-synta
    ejemplo: **confirmá el formato real con `latest <tabla>` antes de filtrar por rango**, o filtrá por las
    columnas numéricas `anio` + `semestre`/`trimestre`. En población, `fecha` es el año: texto en las tablas
    de jurisdicción y departamento, número en la nacional.
-6. **`valor` es texto en `indice_salarios`** (número en el resto). Convertí antes de operar.
+6. **`valor` puede venir como texto en `indice_salarios`**: la spec lo declara número, pero históricamente
+   llegó como string. Convertí a número antes de operar.
 7. **Nulos con significado**: cuando `valor` es `null`, `observaciones` puede traer un signo convencional
    (`*` provisorio, `**` preliminar, `e`/`i` estimado, `-` cero absoluto, `...` no disponible, `///` no
    corresponde, `s` secreto estadístico — muy común en comercio exterior por país). No lo trates como
