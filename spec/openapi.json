@@ -1288,7 +1288,7 @@
             "type": "string"
           },
           "pais_cod": {
-            "description": "Código que identifica el país de origen de las importaciones o de destino de las exportaciones",
+            "description": "Código que identifica el país de destino de las exportaciones",
             "type": "string"
           },
           "valor_FOB": {
@@ -1340,7 +1340,7 @@
             "type": "string"
           },
           "pais_cod": {
-            "description": "Código que identifica el país de origen de las importaciones o de destino de las exportaciones",
+            "description": "Código que identifica el país de origen de las importaciones ",
             "type": "string"
           },
           "valor_CIF": {
@@ -5646,7 +5646,7 @@
           {
             "name": "pais_cod",
             "in": "query",
-            "description": "Filtro para Código que identifica el país de origen de las importaciones o de destino de las exportaciones.                     Use operadores como eq, gt, ilike.",
+            "description": "Filtro para Código que identifica el país de destino de las exportaciones.                     Use operadores como eq, gt, ilike.",
             "schema": {
               "type": "string"
             },
@@ -5856,7 +5856,7 @@
           {
             "name": "pais_cod",
             "in": "query",
-            "description": "Filtro para Código que identifica el país de origen de las importaciones o de destino de las exportaciones.                     Use operadores como eq, gt, ilike.",
+            "description": "Filtro para Código que identifica el país de origen de las importaciones .                     Use operadores como eq, gt, ilike.",
             "schema": {
               "type": "string"
             },

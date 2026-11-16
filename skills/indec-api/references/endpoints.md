@@ -444,7 +444,7 @@ Exportaciones argentinas de bienes por grandes rubros, subrubros y país de dest
 | `Periodo` | string |  | **PK** Período de referencia del dato, expresado en formato AAAAMM (meses) |
 | `rubro_cod` | string |  | **PK** Código que identifica el rubro al que pertenece la exportación |
 | `subrubro_cod` | string |  | **PK** Código de tres posiciones que identifica el subrubro de exportación dentro del rubro correspondiente |
-| `pais_cod` | string |  | **PK** Código que identifica el país de origen de las importaciones o de destino de las exportaciones |
+| `pais_cod` | string |  | **PK** Código que identifica el país de destino de las exportaciones |
 | `valor_FOB` | number | sí | Valor de las exportaciones a precios FOB, expresado en dólares estadounidenses |
 | `Peso_Neto` | number | sí | Peso neto de los bienes que componen el rubro o subrubro informado, expresado en kilogramos |
 
@@ -464,6 +464,6 @@ Importaciones argentinas de bienes por uso económico, grandes categorías econ�
 | `Periodo` | string |  | **PK** Período de referencia del dato, expresado en formato AAAAMM (meses) |
 | `uso_economico_cod` | string |  | **PK** Código que identifica el uso económico de las importaciones |
 | `gce_cod` | string |  | **PK** Código que identifica la gran categoría económica dentro del uso económico de importación correspondiente |
-| `pais_cod` | string |  | **PK** Código que identifica el país de origen de las importaciones o de destino de las exportaciones |
+| `pais_cod` | string |  | **PK** Código que identifica el país de origen de las importaciones |
 | `valor_CIF` | number | sí | Valor de las importaciones a precios CIF, expresado en dólares estadounidenses |
 | `peso_neto` | number | sí | Peso neto de los bienes que componen el uso económico o categoría económica informada, expresado en kilogramos |
